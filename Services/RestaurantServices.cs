@@ -85,7 +85,5 @@ namespace RestaurantAPI.Services
         }
 
 
-        public IMapper Mapper { get; }
-        public ILogger<RestaurantServices> Logger { get; }
     }
 }
