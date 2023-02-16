@@ -57,7 +57,7 @@ var builder = WebApplication.CreateBuilder();
             });
 
 
-            builder.Services.AddAuthorization(options=>
+            // builder.Services.AddAuthorization(options=>
             {
                 options.AddPolicy("HasNationality", builder=> builder.RequireClaim("Nationality","German"));
                 options.AddPolicy("AtLeast20", builder => builder.AddRequirements(new MinimumAgeRequirement(20)));
