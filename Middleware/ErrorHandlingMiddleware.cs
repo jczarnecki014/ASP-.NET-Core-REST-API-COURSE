@@ -21,10 +21,20 @@ namespace RestaurantAPI.Middleware
             {
                 await next.Invoke(context);
             }
+            catch(ForbidException error)
+            {
+                context.Response.StatusCode=403;
+                await context.Response.WriteAsync(error.Message);
+            }
+            catch(BadRequestException error)
+            {
+                context.Response.StatusCode=400;
+                await context.Response.WriteAsync(error.Message);
+            }
             catch(NotFoundException error)
             {
                 context.Response.StatusCode = 404;
-                await context.Response.WriteAsync("Restaurant not found");
+                await context.Response.WriteAsync(error.Message);
             }
             catch(Exception error)
             {

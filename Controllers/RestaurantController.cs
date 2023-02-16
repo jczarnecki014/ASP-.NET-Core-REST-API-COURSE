@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantAPI.Entities;
@@ -8,11 +9,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace RestaurantAPI.Controllers
 {
     [Route("api/restaurant")]
     [ApiController]
+    [Authorize]
     public class RestaurantController : ControllerBase
     {
         private IRestaurantServices _Restaurant_Services { get; }
@@ -22,9 +25,11 @@ namespace RestaurantAPI.Controllers
             _Restaurant_Services = _restaurant_services;
         }
         [HttpGet]
-        public ActionResult GetAll()
+        /*[Authorize(Policy = "AtLeast20")]*/
+        /*[Authorize(Policy = "MinNumberOfRestaurant")]*/
+        public ActionResult GetAll([FromQuery] RestaurantQuery query)
         {
-            var restaurants = _Restaurant_Services.GetAll();
+            var restaurants = _Restaurant_Services.GetAll(query);
             return Ok(restaurants);
         }
         [HttpGet("{id}")]
@@ -39,6 +44,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult CreateRestaurant([FromBody] CreateRestaurantDBO restaurant)
         {
             var id = _Restaurant_Services.Create(restaurant);
@@ -60,7 +66,6 @@ namespace RestaurantAPI.Controllers
         {
 
             _Restaurant_Services.Update(id, dto);
-          
             return Ok();
         }
 

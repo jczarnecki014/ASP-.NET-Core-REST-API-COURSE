@@ -4,7 +4,10 @@ namespace RestaurantAPI.Entities
 {
     public class RestaurantDbContext:DbContext
     {
-        private readonly string _connectionString = "Server=localhost;Database=RestaurantDb;Trusted_Connection=True;";
+        public RestaurantDbContext(DbContextOptions<RestaurantDbContext> options):base(options)
+        {
+
+        }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Address> Address { get; set; }
         public  DbSet<Dish> Dishes{ get; set; }
@@ -25,7 +28,7 @@ namespace RestaurantAPI.Entities
             modelBuilder.Entity<Restaurant>()
             .Property(u => u.name)
             .IsRequired()
-            .HasMaxLength(25);
+            .HasMaxLength(50);
 
             modelBuilder.Entity<Dish>()
             .Property(u=>u.Name)
@@ -37,11 +40,7 @@ namespace RestaurantAPI.Entities
 
             modelBuilder.Entity<Address>()
             .Property(u=>u.Street)
-            .HasMaxLength(50);
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
+            .HasMaxLength(80);
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using RestaurantAPI.Models;
 using RestaurantAPI.Services;
 
 namespace RestaurantAPI.Controllers
 {
     [Route("api/account")]
-    /*[ApiController]*/
+    [ApiController]
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -20,6 +21,12 @@ namespace RestaurantAPI.Controllers
             _accountService.RegisterUser(registerUserDto);
 
             return Ok();
+        }
+        [HttpPost("login")]
+        public ActionResult Login([FromBody] LoginDTO dto)
+        {
+            var token = _accountService.GenerateJwt(dto);
+            return Ok(token);
         }
     }
 }

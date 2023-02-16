@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RestaurantAPI.Models;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace RestaurantAPI.Services
 {
@@ -8,7 +9,7 @@ namespace RestaurantAPI.Services
     {
         public int Create(CreateRestaurantDBO dto);
         public void Delete(int id);
-        public List<RestaurantDTO> GetAll();
+        public PageResoult<RestaurantDTO> GetAll(RestaurantQuery query);
         public RestaurantDTO GetById(int id);
         public void Update(int id, UpdateRestaurantDTO dto);
     }
