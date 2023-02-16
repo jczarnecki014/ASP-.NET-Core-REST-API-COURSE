@@ -41,7 +41,7 @@ var builder = WebApplication.CreateBuilder();
             { 
                 option.DefaultAuthenticateScheme = "Bearer";
                 option.DefaultScheme = "Bearer"
-                option.DefaultChallengeScheme = "Bearer";
+                option.DefaultChallengeScheme = "Bearer"
             }).AddJwtBearer(cfg=>
             {
                 cfg.RequireHttpsMetadata = false;
