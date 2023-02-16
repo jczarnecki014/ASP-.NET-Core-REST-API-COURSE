@@ -31,30 +31,30 @@ var builder = WebApplication.CreateBuilder();
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
 
-// Configure service
+Configure service
 
-            // var authenticationSettings = new AuthenticationSettings();
+            var authenticationSettings = new AuthenticationSettings();
 
-            // builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
+            builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
 
-            // builder.Services.AddAuthentication(option=>
-            // { 
-            //     option.DefaultAuthenticateScheme = "Bearer";
-            //     option.DefaultScheme = "Bearer";
-            //     option.DefaultChallengeScheme = "Bearer";
-            // }).AddJwtBearer(cfg=>
-            // {
-            //     cfg.RequireHttpsMetadata = false;
-            //     cfg.SaveToken = true;
-            //     cfg.TokenValidationParameters = new TokenValidationParameters
-            //     {
-            //         ValidIssuer = authenticationSettings.JwtIssuer,
-            //         ValidAudience = authenticationSettings.JwtIssuer,
-            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey))
+            builder.Services.AddAuthentication(option=>
+            { 
+                option.DefaultAuthenticateScheme = "Bearer";
+                option.DefaultScheme = "Bearer";
+                option.DefaultChallengeScheme = "Bearer";
+            }).AddJwtBearer(cfg=>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = authenticationSettings.JwtIssuer,
+                    ValidAudience = authenticationSettings.JwtIssuer,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey))
 
-            //     };
+                };
 
-            // });
+            });
 
 
             builder.Services.AddAuthorization(options=>
