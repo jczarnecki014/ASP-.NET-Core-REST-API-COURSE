@@ -45,7 +45,7 @@ var builder = WebApplication.CreateBuilder();
             }).AddJwtBearer(cfg=>
             {
                 cfg.RequireHttpsMetadata = false;
-                cfg.SaveToken = true
+                cfg.SaveToken = true;
                 cfg.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidIssuer = authenticationSettings.JwtIssuer,
