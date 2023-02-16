@@ -67,7 +67,7 @@ var builder = WebApplication.CreateBuilder();
             builder.Services.AddScoped<IAuthorizationHandler,ResourceOperationRequirementHandler>();
             builder.Services.AddScoped<IAuthorizationHandler,MinimumAmountOfRestaurantRequirementHandler>();
             builder.Services.AddScoped<IUserContextService,UserContextService>();
-            builder.Services.AddControllers().AddFluentValidation()
+            builder.Services.AddControllers().AddFluentValidation();
             builder.Services.AddDbContext<RestaurantDbContext>(option =>{
                 option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
             });
