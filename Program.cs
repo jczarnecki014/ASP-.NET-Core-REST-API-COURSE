@@ -82,8 +82,8 @@ var builder = WebApplication.CreateBuilder();
             builder.Services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();
             builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDTOValidator>();
             builder.Services.AddScoped<IValidator<RestaurantQuery>,RestaurantQueryValidator>();
-            builder.Services.AddHttpContextAccessor()
-            builder.Services.AddSwaggerGen()
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddSwaggerGen();
             builder.Services.AddCors(options => 
             {
                 options.AddPolicy("FrontEndClient",poliicyBuilder => 
