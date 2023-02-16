@@ -59,7 +59,7 @@ var builder = WebApplication.CreateBuilder();
 
             builder.Services.AddAuthorization(options=>
             {
-                options.AddPolicy("HasNationality", builder=> builder.RequireClaim("Nationality","German")); JAKAS PAJACERKA
+                options.AddPolicy("HasNationality", builder=> builder.RequireClaim("Nationality","German"));
                 options.AddPolicy("AtLeast20", builder => builder.AddRequirements(new MinimumAgeRequirement(20)));
                 options.AddPolicy("MinNumberOfRestaurant", builder => builder.AddRequirements(new MinimumAmountOfRestaurantsRequirement(2)));
             });
